@@ -3,7 +3,9 @@ package com.pharm.smartprakhar.taskapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         Button camera=findViewById(R.id.camera);
         Button gallery=findViewById(R.id.gallery);
         db=new Databasehelper(camera.getContext());
+
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)==
+                PackageManager.PERMISSION_GRANTED) {
+            } else {
+            requestPermissions(new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                   3);}
+
         Button savedimage=findViewById(R.id.savedimages);
           imageoperator=new Imageoperator(camera.getContext());
         camera.setOnClickListener(new View.OnClickListener() {
